@@ -1,7 +1,21 @@
 package model.logic;
 
+import java.io.FileReader;
+import java.io.IOException;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
+import model.data_structures.IListaDoblementeEncadenada;
+import model.data_structures.ListaEncadenada;
+import model.data_structures.ListaEncadenada.IteratorLista;
+import model.data_structures.Nodo;
+import model.data_structures.noExisteObjetoException;
 
 /**
  * Definicion del modelo del mundo
@@ -11,25 +25,28 @@ public class Modelo {
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IArregloDinamico datos;
-	
+	private IListaDoblementeEncadenada<Multa> datos;
+
+	private ListaEncadenada<Multa> listaEncadenada;
+
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public Modelo()
 	{
-		datos = new ArregloDinamico(7);
+		datos = new ListaEncadenada<Multa>();
+		listaEncadenada = new ListaEncadenada<Multa>();
 	}
-	
+
 	/**
 	 * Constructor del modelo del mundo con capacidad dada
 	 * @param tamano
 	 */
 	public Modelo(int capacidad)
 	{
-		datos = new ArregloDinamico(capacidad);
+		//datos = new ArregloDinamico(capacidad);
 	}
-	
+
 	/**
 	 * Servicio de consulta de numero de elementos presentes en el modelo 
 	 * @return numero de elementos presentes en el modelo
@@ -43,30 +60,123 @@ public class Modelo {
 	 * Requerimiento de agregar dato
 	 * @param dato
 	 */
-	public void agregar(String dato)
+	public void agregar(Nodo<Multa> dato)
 	{	
-		datos.agregar(dato);
+		datos.agregarNodoAlFinal(dato);;
 	}
-	
+
 	/**
 	 * Requerimiento buscar dato
 	 * @param dato Dato a buscar
 	 * @return dato encontrado
+	 * @throws noExisteObjetoException 
 	 */
-	public String buscar(String dato)
+	public int buscarPosicion(Nodo<Multa> dato) throws noExisteObjetoException
 	{
-		return datos.buscar(dato);
+		return datos.darPosicionNodo(dato);
 	}
-	
+
 	/**
 	 * Requerimiento eliminar dato
 	 * @param dato Dato a eliminar
 	 * @return dato eliminado
+	 * @throws noExisteObjetoException 
 	 */
-	public String eliminar(String dato)
+	public Nodo<Multa> eliminar(Nodo<Multa> dato) throws noExisteObjetoException
 	{
-		return datos.eliminar(dato);
+		return datos.EliminarNodoObj(dato);
 	}
 
+	public void cargarDatos() throws noExisteObjetoException 
+	{
+		String path = "./data/Gson";
+		JsonReader lector;
 
-}
+
+		try {
+
+
+			ListaEncadenada<Multa> listaMultas = new ListaEncadenada<>();
+
+
+			lector = new JsonReader(new FileReader(path));
+			JsonElement elem = JsonParser.parseReader(lector);
+			JsonObject ja = elem.getAsJsonObject();
+
+			JsonArray features = ja.getAsJsonArray("features");
+
+
+			for(JsonElement e : features)
+			{
+
+
+
+				JsonObject propiedades = (JsonObject) e.getAsJsonObject().get("properties");
+				long id = propiedades.get("OBJECTID").getAsLong();
+				String fecha = propiedades.get("FECHA_HORA").getAsString();
+				String medioDete = propiedades.getAsJsonObject().get("MEDIO_DETE").getAsString();
+				String claseVehiculo = propiedades.getAsJsonObject().get("CLASE_VEHI").getAsString();
+				String tipoServicio = propiedades.getAsJsonObject().get("TIPO_SERVI").getAsString();
+				String infraccion = propiedades.getAsJsonObject().get("INFRACCION").getAsString();
+				String descripcion = propiedades.getAsJsonObject().get("DES_INFRAC").getAsString();
+				String localidad = propiedades.getAsJsonObject().get("LOCALIDAD").getAsString();
+
+
+				JsonObject geometry = (JsonObject) e.getAsJsonObject().get("geometry");
+
+				String tipo = geometry.get("type").getAsString();
+
+				double[] listaCoords = new double[3];
+
+				JsonArray coordsJson = geometry.getAsJsonArray("coordinates");
+
+
+
+
+				for(int i = 0; i < coordsJson.size(); i ++)
+				{
+					listaCoords[i] = coordsJson.get(i).getAsDouble();
+
+
+				}
+
+				Geo geometria = new Geo(tipo, listaCoords);
+
+				Multa multa = new Multa(id, fecha, medioDete, claseVehiculo, tipoServicio, infraccion, descripcion, localidad, geometria);
+
+
+				Nodo<Multa> nMulta = new Nodo<Multa>(multa);
+				listaEncadenada.agregarNodoAlFinal(nMulta);
+
+			} //llave for grande
+
+		}//llave try
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+
+
+	} //llave metodo
+
+
+	public Multa buscarComparendoPorId(long pID)
+	{
+		boolean parar = false;
+		Multa laMulta = null;
+				Nodo<Multa> actual = datos.darPrimero();
+		while(actual.darSiguiente() != null && !parar)
+		{
+			if(actual.darGenerico().getId() == pID)
+			{
+				parar = true;
+				laMulta = actual.darGenerico();
+
+			}
+		}
+
+		System.out.println(laMulta.toString());
+		return laMulta;
+	}
+
+}//llave clase

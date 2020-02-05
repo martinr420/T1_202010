@@ -29,7 +29,12 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	
+	public Nodo<K> darUltimo()
+	{
+		return ultimo;
+	}
 	@Override
 	public int darTamano() {
 		// TODO Auto-generated method stub
@@ -74,7 +79,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 	}
 
 	@Override
-	public void EliminarUltimo() throws noExisteObjetoException {
+	public Nodo<K> EliminarUltimo() throws noExisteObjetoException {
 
 		if(tamano == 0)
 		{
@@ -83,18 +88,23 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 		else
 		{
 			Nodo<K> aEliminar = ultimo;
+			
 			if(aEliminar.darAnterior() != null)
 			{
+				
 				ultimo = aEliminar.darAnterior();
 
 				ultimo.desconectarSiguiente();
+				
 
 
 			}
 			else
 			{
+			
 				ultimo = null;
 				primero = null;
+				
 
 
 			}
@@ -103,6 +113,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 
 			tamano--;
 
+			return aEliminar;
 		}
 
 		// TODO Auto-generated method stub
@@ -110,7 +121,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 	}
 
 	@Override
-	public void EliminarPrimero() throws noExisteObjetoException {
+	public Nodo<K> EliminarPrimero() throws noExisteObjetoException {
 
 
 		if(tamano == 0)
@@ -136,6 +147,8 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 			}
 
 			tamano--;
+			
+			return aEliminar;
 		}
 
 
@@ -145,7 +158,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 	}
 
 	@Override
-	public void EliminarNodoPos(int pPosicion) throws FueraDeAlcanceException, noExisteObjetoException {
+	public Nodo<K> EliminarNodoPos(int pPosicion) throws FueraDeAlcanceException, noExisteObjetoException {
 
 		if(pPosicion >= tamano)
 		{
@@ -155,11 +168,15 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 		{
 			if(pPosicion == 0)
 			{
+				
 				EliminarPrimero();
+				return primero;
 			}
 			else if(pPosicion == tamano - 1)
 			{
 				EliminarUltimo();
+				
+				return ultimo;
 			}
 			else
 			{
@@ -175,15 +192,20 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 				aEliminar.darAnterior().cambiarSiguiente(aEliminar.darSiguiente());
 				aEliminar.darSiguiente().cambiarAnterior(aEliminar.darAnterior());
 				tamano--;
+				
+				return aEliminar;
+			
 			}
-
+			
 		}
+		
+		
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void EliminarNodoObj(Nodo pNodo) throws noExisteObjetoException {
+	public Nodo<K> EliminarNodoObj(Nodo pNodo) throws noExisteObjetoException {
 		Nodo<K> aEliminar = primero;
 
 
@@ -204,6 +226,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 		aEliminar.darAnterior().cambiarSiguiente(aEliminar.darSiguiente());
 		aEliminar.darSiguiente().cambiarAnterior(aEliminar.darAnterior());
 		tamano--;
+		return aEliminar;
 
 
 
@@ -213,7 +236,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 	}
 
 	@Override
-	public void agregarNodoInicio(Nodo pNodo) {
+	public Nodo<K> agregarNodoInicio(Nodo pNodo) {
 
 		if(primero == null)
 		{
@@ -228,13 +251,15 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 			primero = pNodo;
 		}
 		tamano++;
+		
+		return pNodo;
 
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void agregarNodoAlFinal(Nodo pNodo) {
+	public Nodo<K> agregarNodoAlFinal(Nodo pNodo) {
 
 		if(primero == null)
 		{
@@ -250,12 +275,13 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 		}
 
 		tamano++;
+		return pNodo;
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void agregarNodoEnPosicion(int pPosicion, Nodo pNodo) throws FueraDeAlcanceException {
+	public Nodo<K> agregarNodoEnPosicion(int pPosicion, Nodo pNodo) throws FueraDeAlcanceException {
 
 		if(pPosicion >= tamano)
 		{
@@ -288,12 +314,16 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 
 
 				}
+				
+				
 
 				pNodo.cambiarSiguiente(actual.darSiguiente());
 				pNodo.cambiarAnterior(actual);
 				actual.darSiguiente().cambiarAnterior(pNodo);
 				actual.cambiarSiguiente(pNodo);
 				tamano++;
+				
+				
 
 
 
@@ -301,7 +331,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 
 
 		}
-
+		return pNodo;
 	}
 
 	@Override
@@ -323,17 +353,21 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 		return lista;
 	}
 
-	public class IteratorLista implements Iterator<Nodo<K>>
+	public class IteratorLista<K> implements Iterator<Nodo<K>>
 	{
 
 		private boolean PrimeraIter;
 		private Nodo<K> actual;
+		ListaEncadenada<K> lista;
 
 
 		public IteratorLista() 
 		{
 			PrimeraIter = true;
 			actual = null;
+			lista = new ListaEncadenada<K>();
+			
+			
 
 			
 		}	// TODO Auto-generated constructor stub
@@ -362,7 +396,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 		{
 			if(PrimeraIter)
 			{
-				actual = primero;
+				actual = (Nodo<K>) primero;
 				PrimeraIter = false;
 			}
 			else 
@@ -373,6 +407,12 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 			return  actual;
 		}
 
+	}
+
+	@Override
+	public Nodo darPrimero() {
+		// TODO Auto-generated method stub
+		return primero;
 	}
 
 

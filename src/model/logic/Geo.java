@@ -1,4 +1,4 @@
-package modelo;
+package model.logic;
 
 public class Geo {
 

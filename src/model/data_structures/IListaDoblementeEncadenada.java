@@ -12,6 +12,10 @@ import java.util.ArrayList;
 public interface IListaDoblementeEncadenada<K> extends Iterable {
 
 
+	public Nodo<K> darPrimero();
+	
+	
+	public Nodo<K> darUltimo();
 	/**
 	 * metodo que retorna un int con el tamaño de la lista
 	 * si la lista esta vacia retorna 0.
@@ -40,21 +44,21 @@ public interface IListaDoblementeEncadenada<K> extends Iterable {
 	 * 
 	 */
 
-	public void EliminarUltimo() throws noExisteObjetoException;
+	public Nodo<K> EliminarUltimo() throws noExisteObjetoException;
 	
 	/**
 	 * elimina el primer nodo de la lista, reduce su tamaño y 
 	 * asigna el atributo primerNodo al siguiente Nodo si existe
 	 */
 
-	public void EliminarPrimero () throws noExisteObjetoException;
+	public Nodo<K> EliminarPrimero () throws noExisteObjetoException;
 	
 	/**
 	 * Elimina el nodo en la posicion indicada, reduce el tamaño de la lista
 	 * @param pPosicion
 	 */
 
-	public void EliminarNodoPos(int pPosicion) throws FueraDeAlcanceException, noExisteObjetoException;
+	public Nodo<K> EliminarNodoPos(int pPosicion) throws FueraDeAlcanceException, noExisteObjetoException;
 	
 	/**
 	 * Elimina el nodo de la lista encadenada dada por parametro
@@ -62,21 +66,21 @@ public interface IListaDoblementeEncadenada<K> extends Iterable {
 	 * @throws noExisteObjetoException 
 	 */
 
-	public void EliminarNodoObj(Nodo<K> pNodo) throws noExisteObjetoException; 
+	public Nodo<K> EliminarNodoObj(Nodo<K> pNodo) throws noExisteObjetoException; 
 	
 	/**
 	 * agrega un nodo al inicio de la cadena 
 	 * @param pNodo nodo que se desea agregar
 	 */
 	
-	public void agregarNodoInicio(Nodo<K> pNodo) ;
+	public Nodo<K> agregarNodoInicio(Nodo<K> pNodo) ;
 	
 	/**
 	 * agrega un nodo al final de la cadena 
 	 * @param pNodo nodo que se desea agregar
 	 */
 	
-	public void agregarNodoAlFinal(Nodo<K> pNodo);
+	public Nodo<K> agregarNodoAlFinal(Nodo<K> pNodo);
 	
 	/**
 	 * agrega un nodo en la posicion dada por parametro
@@ -85,7 +89,7 @@ public interface IListaDoblementeEncadenada<K> extends Iterable {
 	 * @throws FueraDeAlcanceException si la posicion es mayor al numero de elementos que tiene la lista 
 	 */
 	
-	public void agregarNodoEnPosicion(int pPosicion, Nodo<K> pNodo)throws FueraDeAlcanceException;
+	public Nodo<K> agregarNodoEnPosicion(int pPosicion, Nodo<K> pNodo)throws FueraDeAlcanceException;
 /**
  * agrega todos los nodos a un arrayList
  * @return el arraylist con los nodos 
