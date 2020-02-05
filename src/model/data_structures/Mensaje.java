@@ -3,27 +3,27 @@ package model.data_structures;
 import java.util.List;
 
 public class Mensaje {
-	
-public long id;
-	
-	public String fecha;
-	
-	public String medioDete;
-	
-	public String vehiculo;
-	
-	public String servicio;
-	
-	public String infraccion;
-	
-	public String descripcion;
-	
-	public String localidad;
-	
-	public Geo geo;
-	
 
-	
+	public long id;
+
+	public String fecha;
+
+	public String medioDete;
+
+	public String vehiculo;
+
+	public String servicio;
+
+	public String infraccion;
+
+	public String descripcion;
+
+	public String localidad;
+
+	public Geo geo;
+
+
+
 	public Mensaje(long id, String fecha, String medioDete, String vehiculo, String servicio, String infraccion,
 			String descripcion, String localidad, Geo geo) {
 		super();
@@ -40,10 +40,21 @@ public long id;
 
 	public String toString()
 	{
-		
-		
-		return "";
+
+		System.out.println("La id es "+ id +"la fecha del comparendo"+ fecha 
+				+" el medio de detencion es "+ medioDete +
+				"el vehiculo es "+ vehiculo +" el tipo de servicio es " + servicio + 
+				" la infraccion es " + infraccion + 
+				" la descripcion de lo sucedido es " + descripcion + "la localidad es "+
+				localidad +" la geografira es"+ geo.toString());
+		String msj = "La id es "+ id +"la fecha del comparendo"+ fecha 
+				+" el medio de detencion es "+ medioDete +
+				"el vehiculo es "+ vehiculo +" el tipo de servicio es " + servicio + 
+				" la infraccion es " + infraccion + 
+				" la descripcion de lo sucedido es " + descripcion + "la localidad es "+
+				localidad +" la geografira es"+ geo.toString();
+		return msj;
 	}
-	
-	
+
+
 }

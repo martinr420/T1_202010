@@ -322,6 +322,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 		// TODO Auto-generated method stub
 		return lista;
 	}
+	
 
 
 
