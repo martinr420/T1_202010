@@ -176,7 +176,7 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 				aEliminar.darSiguiente().cambiarAnterior(aEliminar.darAnterior());
 				tamano--;
 			}
-			
+
 		}
 		// TODO Auto-generated method stub
 
@@ -294,36 +294,86 @@ public class ListaEncadenada<K> implements IListaDoblementeEncadenada{
 				actual.darSiguiente().cambiarAnterior(pNodo);
 				actual.cambiarSiguiente(pNodo);
 				tamano++;
-				
+
 
 
 			}
-			
-			
+
+
 		}
 
 	}
 
 	@Override
 	public ArrayList<Nodo<K>> darNodos() {
-		
+
 		Nodo<K> actual = primero;
 		ArrayList<Nodo<K>> lista = new ArrayList<Nodo<K>>();
-		
+
 		while(actual != null)
 		{
 			lista.add(actual);
 		}
-		
-		
-		
-		
-		
+
+
+
+
+
 		// TODO Auto-generated method stub
 		return lista;
 	}
-	
 
+	public class IteratorLista implements Iterator<Nodo<K>>
+	{
+
+		private boolean PrimeraIter;
+		private Nodo<K> actual;
+
+
+		public IteratorLista() 
+		{
+			PrimeraIter = true;
+			actual = null;
+
+			
+		}	// TODO Auto-generated constructor stub
+		
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			boolean existe = false;
+			
+			if(PrimeraIter && primero != null)
+			{	
+					existe = true;	
+			}
+			else if (actual.darSiguiente() != null)
+			{
+				existe = true;
+			}
+			
+			
+			
+			return existe;
+		}
+
+		@Override
+		public Nodo<K> next() 
+		{
+			if(PrimeraIter)
+			{
+				actual = primero;
+				PrimeraIter = false;
+			}
+			else 
+			{
+				actual = actual.darSiguiente();
+			}
+			// TODO Auto-generated method stub
+			return  actual;
+		}
+
+	}
 
 
 

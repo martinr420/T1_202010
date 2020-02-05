@@ -2,19 +2,22 @@ package model.data_structures;
 
 public class Nodo<K> 
 {
-	
+	private K generico;
 	private Nodo<K> siguiente;
 	
 	private Nodo<K> anterior;
 	
-	public Nodo()
+	public Nodo(K pGenerico)
 	
 	{
 		siguiente = null;
 		
 		anterior = null;
+		
+		generico = pGenerico;
 				
 	}
+	
 	
 	public Nodo<K> darSiguiente()
 	{
@@ -47,7 +50,10 @@ public class Nodo<K>
 		anterior = null;
 	}
 	
-	
+	public K darGenerico()
+	{
+		return generico;
+	}
 	
 
 }
