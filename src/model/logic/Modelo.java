@@ -27,7 +27,6 @@ public class Modelo {
 	 */
 	private IListaDoblementeEncadenada<Multa> datos;
 
-	private ListaEncadenada<Multa> listaEncadenada;
 
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
@@ -35,16 +34,21 @@ public class Modelo {
 	public Modelo()
 	{
 		datos = new ListaEncadenada<Multa>();
-		listaEncadenada = new ListaEncadenada<Multa>();
+		
 	}
 
 	/**
 	 * Constructor del modelo del mundo con capacidad dada
 	 * @param tamano
 	 */
-	public Modelo(int capacidad)
+//	public Modelo(int capacidad)
+//	{
+//		//datos = new ArregloDinamico(capacidad);
+//	}
+	
+	public ListaEncadenada<Multa> darDatos()
 	{
-		//datos = new ArregloDinamico(capacidad);
+		return (ListaEncadenada<Multa>) datos;
 	}
 
 	/**
@@ -146,7 +150,7 @@ public class Modelo {
 
 
 				Nodo<Multa> nMulta = new Nodo<Multa>(multa);
-				listaEncadenada.agregarNodoAlFinal(nMulta);
+				datos.agregarNodoAlFinal(nMulta);
 
 			} //llave for grande
 
@@ -164,7 +168,7 @@ public class Modelo {
 	{
 		boolean parar = false;
 		Multa laMulta = null;
-				Nodo<Multa> actual = datos.darPrimero();
+		Nodo<Multa> actual = datos.darPrimero();
 		while(actual.darSiguiente() != null && !parar)
 		{
 			if(actual.darGenerico().getId() == pID)
@@ -175,7 +179,7 @@ public class Modelo {
 			}
 		}
 
-		System.out.println(laMulta.toString());
+		
 		return laMulta;
 	}
 
