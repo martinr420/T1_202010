@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="model.data_structures.Nodo" project="esqueleto_T0_202010" 
     file="/esqueleto_T0_202010/src/model/data_structures/Nodo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="206" x="208" y="278"/>    
+    <position height="-1" width="-1" x="331" y="240"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="model.data_structures.ListaEncadenada" project="esqueleto_T0_202010" 
     file="/esqueleto_T0_202010/src/model/data_structures/ListaEncadenada.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="330" y="37"/>    
+    <position height="-1" width="-1" x="328" y="-75"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -22,7 +22,7 @@
   <class id="3" language="java" name="model.data_structures.noExisteObjetoException" project="esqueleto_T0_202010" 
     file="/esqueleto_T0_202010/src/model/data_structures/noExisteObjetoException.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="76" y="-106"/>    
+    <position height="-1" width="-1" x="79" y="-102"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -32,7 +32,7 @@
   <interface id="4" language="java" name="model.data_structures.IListaDoblementeEncadenada" 
     project="esqueleto_T0_202010" file="/esqueleto_T0_202010/src/model/data_structures/IListaDoblementeEncadenada.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="591" y="-269"/>    
+    <position height="-1" width="-1" x="325" y="-428"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -42,7 +42,7 @@
   <class id="5" language="java" name="model.data_structures.FueraDeAlcanceException" project="esqueleto_T0_202010" 
     file="/esqueleto_T0_202010/src/model/data_structures/FueraDeAlcanceException.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="59" y="8"/>    
+    <position height="-1" width="-1" x="85" y="-11"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -50,33 +50,50 @@
     </display>  
   </class>  
   <association id="6">    
+    <bendpoint x="314" y="107"/>    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="7" name="primero"/>      
-      <multiplicity id="8" minimum="0" maximum="1"/>    
+      <attribute id="7" name="ultimo">        
+        <position height="18" width="35" x="267" y="85"/>      
+      </attribute>      
+      <multiplicity id="8" minimum="0" maximum="1">        
+        <position height="16" width="23" x="277" y="102"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="9">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="10" name="ultimo"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="10" name="siguiente">        
+        <position height="0" width="0" x="20" y="-114"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="20" y="-114"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="12">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="13" name="siguiente"/>      
-      <multiplicity id="14" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="13" name="primero">        
+        <position height="18" width="44" x="331" y="85"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="1">        
+        <position height="0" width="0" x="20" y="-114"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="15">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="16" name="anterior"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+      <attribute id="16" name="anterior">        
+        <position height="0" width="0" x="20" y="-114"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
+        <position height="0" width="0" x="20" y="-114"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
